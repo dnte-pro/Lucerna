@@ -8,7 +8,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { useSettings, FontFamily, FontSize } from "@/lib/settings-context";
+import { useSettings } from "@/lib/settings-context";
+import type { FontFamily, FontSize } from "@/lib/settings-context";
 import { Label } from "@/components/ui/label";
 
 const families: { value: FontFamily; label: string; sample: string }[] = [

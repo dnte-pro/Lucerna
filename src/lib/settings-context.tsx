@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+const { ReactNode } = React;
 
 export type Theme = "light" | "dark";
 export type FontFamily = "serif" | "sans" | "modern";

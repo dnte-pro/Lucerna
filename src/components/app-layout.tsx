@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ReactNode } from "react";
+import React from "react";
+const { ReactNode } = React;
 import { Home, BookOpen, Hand, Calendar } from "lucide-react";
 import { SettingsSheet } from "./settings-sheet";
 

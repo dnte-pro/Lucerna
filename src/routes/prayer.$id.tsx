@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
 import { prayers } from "@/lib/prayers-data";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/prayer/$id")({
