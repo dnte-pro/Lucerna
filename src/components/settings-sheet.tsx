@@ -1,4 +1,5 @@
-import { Settings as SettingsIcon, Sun, Moon } from "lucide-react";
+import { Settings as SettingsIcon, Sun, Moon, Bell, BellOff } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -11,6 +12,12 @@ import { Button } from "@/components/ui/button";
 import { useSettings } from "@/lib/settings-context";
 import type { FontFamily, FontSize } from "@/lib/settings-context";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  loadNotifySettings,
+  saveNotifySettings,
+  requestPermission,
+} from "@/lib/notifications";
 
 const families: { value: FontFamily; label: string; sample: string }[] = [
   { value: "serif", label: "Classic Missal", sample: "Libre Baskerville" },
@@ -28,6 +35,37 @@ const sizes: { value: FontSize; label: string }[] = [
 export function SettingsSheet() {
   const { theme, setTheme, fontFamily, setFontFamily, fontSize, setFontSize } =
     useSettings();
+  const [notifyEnabled, setNotifyEnabled] = useState(false);
+  const [notifyTime, setNotifyTime] = useState("07:30");
+  const [permission, setPermission] = useState<NotificationPermission | "unsupported">(
+    "default",
+  );
+
+  useEffect(() => {
+    const s = loadNotifySettings();
+    setNotifyEnabled(s.enabled);
+    setNotifyTime(s.time);
+    if (typeof Notification === "undefined") setPermission("unsupported");
+    else setPermission(Notification.permission);
+  }, []);
+
+  async function toggleNotifications() {
+    if (!notifyEnabled) {
+      const p = await requestPermission();
+      setPermission(p);
+      if (p !== "granted") return;
+      setNotifyEnabled(true);
+      saveNotifySettings({ enabled: true, time: notifyTime });
+    } else {
+      setNotifyEnabled(false);
+      saveNotifySettings({ enabled: false, time: notifyTime });
+    }
+  }
+
+  function onTimeChange(v: string) {
+    setNotifyTime(v);
+    saveNotifySettings({ enabled: notifyEnabled, time: v });
+  }
 
   return (
     <Sheet>
@@ -120,6 +158,50 @@ export function SettingsSheet() {
           <p className="border-t border-border/60 pt-4 text-center text-xs text-muted-foreground">
             Settings are saved on this device.
           </p>
+
+          <section className="border-t border-border/60 pt-6">
+            <Label className="text-xs uppercase tracking-widest text-muted-foreground">
+              Daily prayer reminder
+            </Label>
+            <button
+              onClick={toggleNotifications}
+              disabled={permission === "unsupported" || permission === "denied"}
+              className={`mt-3 w-full flex items-center justify-center gap-2 rounded-md border p-3 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                notifyEnabled
+                  ? "border-primary bg-primary/10 text-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {notifyEnabled ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
+              {notifyEnabled ? "Reminder on" : "Enable daily reminder"}
+            </button>
+            <div className="mt-3 flex items-center gap-3">
+              <Label htmlFor="notify-time" className="text-sm text-muted-foreground">
+                Time
+              </Label>
+              <Input
+                id="notify-time"
+                type="time"
+                value={notifyTime}
+                onChange={(e) => onTimeChange(e.target.value)}
+                className="max-w-[140px]"
+              />
+            </div>
+            {permission === "denied" && (
+              <p className="mt-2 text-xs text-destructive">
+                Notifications are blocked in your browser settings.
+              </p>
+            )}
+            {permission === "unsupported" && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Notifications aren't supported here.
+              </p>
+            )}
+            <p className="mt-2 text-xs text-muted-foreground">
+              Reminders fire while the app is open. For background alerts on iOS,
+              install Lucerna to your home screen first.
+            </p>
+          </section>
         </div>
       </SheetContent>
     </Sheet>

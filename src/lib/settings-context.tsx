@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-const { ReactNode } = React;
+import { createContext, useContext, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { bootNotifications } from "./notifications";
 
 export type Theme = "light" | "dark";
 export type FontFamily = "serif" | "sans" | "modern";
@@ -53,6 +54,29 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         if (s.fontSize) setSizeState(s.fontSize);
       }
     } catch {}
+
+    // Boot daily notification scheduler.
+    bootNotifications();
+
+    // Register service worker for offline support — published site only,
+    // never inside the editor preview iframe.
+    if ("serviceWorker" in navigator) {
+      const inIframe = (() => {
+        try { return window.self !== window.top; } catch { return true; }
+      })();
+      const host = window.location.hostname;
+      const isPreview =
+        host.includes("id-preview--") ||
+        host.includes("lovableproject.com") ||
+        host.includes("lovable.app");
+      if (!inIframe && !isPreview) {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      } else {
+        navigator.serviceWorker.getRegistrations().then((rs) =>
+          rs.forEach((r) => r.unregister()),
+        );
+      }
+    }
   }, []);
 
   useEffect(() => {

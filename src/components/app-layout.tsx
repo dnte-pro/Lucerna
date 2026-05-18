@@ -1,6 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import React from "react";
-const { ReactNode } = React;
+import type { ReactNode } from "react";
 import { Home, BookOpen, Hand, Calendar } from "lucide-react";
 import { SettingsSheet } from "./settings-sheet";
 
@@ -19,7 +18,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-serif text-xl tracking-wide gold-text">Lumen</span>
+            <span className="font-serif text-xl tracking-wide gold-text">Lucerna</span>
             <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden sm:inline">
               Officium
             </span>
@@ -70,7 +69,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
       </nav>
 
       <footer className="hidden md:block border-t border-border/40 py-6 text-center text-xs text-muted-foreground">
-        <span className="ornament">Ad maiorem Dei gloriam</span>
+        <span className="ornament">For the Greater Glory of God</span>
       </footer>
     </div>
   );

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/readings")({
   component: ReadingsPage,
   head: () => ({
     meta: [
-      { title: "Daily Readings — Lumen" },
+      { title: "Daily Readings — Lucerna" },
       { name: "description", content: "Today's Mass readings: the Word for this day in the Church." },
     ],
   }),
