@@ -55,6 +55,15 @@ Vite will print the local development URL, usually:
 http://localhost:5173
 ```
 
+### Phone Testing On Your Wi-Fi
+
+```bash
+npm run dev:lan
+```
+
+Open the printed URL from your phone using your computer's local IP address,
+for example `http://192.168.1.25:5173`.
+
 ### Production Build
 
 ```bash
