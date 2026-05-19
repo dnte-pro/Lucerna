@@ -1,6 +1,14 @@
 // Lucerna service worker — basic offline shell.
-const CACHE = "lucerna-v1";
-const PRECACHE = ["/", "/prayers", "/readings", "/calendar", "/manifest.json", "/icon.svg"];
+const CACHE = "lucerna-v2";
+const PRECACHE = [
+  "/",
+  "/prayers",
+  "/rosary",
+  "/readings",
+  "/calendar",
+  "/manifest.json",
+  "/icon.svg",
+];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RosaryRouteImport } from './routes/rosary'
 import { Route as ReadingsRouteImport } from './routes/readings'
 import { Route as PrayersRouteImport } from './routes/prayers'
 import { Route as CalendarRouteImport } from './routes/calendar'
@@ -19,6 +20,11 @@ import { Route as PrayerIdRouteImport } from './routes/prayer.$id'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RosaryRoute = RosaryRouteImport.update({
+  id: '/rosary',
+  path: '/rosary',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReadingsRoute = ReadingsRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/prayers': typeof PrayersRoute
   '/readings': typeof ReadingsRoute
+  '/rosary': typeof RosaryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/prayer/$id': typeof PrayerIdRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/prayers': typeof PrayersRoute
   '/readings': typeof ReadingsRoute
+  '/rosary': typeof RosaryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/prayer/$id': typeof PrayerIdRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/prayers': typeof PrayersRoute
   '/readings': typeof ReadingsRoute
+  '/rosary': typeof RosaryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/prayer/$id': typeof PrayerIdRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/prayers'
     | '/readings'
+    | '/rosary'
     | '/sitemap.xml'
     | '/prayer/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/prayers'
     | '/readings'
+    | '/rosary'
     | '/sitemap.xml'
     | '/prayer/$id'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/prayers'
     | '/readings'
+    | '/rosary'
     | '/sitemap.xml'
     | '/prayer/$id'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   PrayersRoute: typeof PrayersRoute
   ReadingsRoute: typeof ReadingsRoute
+  RosaryRoute: typeof RosaryRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PrayerIdRoute: typeof PrayerIdRoute
 }
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rosary': {
+      id: '/rosary'
+      path: '/rosary'
+      fullPath: '/rosary'
+      preLoaderRoute: typeof RosaryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/readings': {
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   PrayersRoute: PrayersRoute,
   ReadingsRoute: ReadingsRoute,
+  RosaryRoute: RosaryRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   PrayerIdRoute: PrayerIdRoute,
 }

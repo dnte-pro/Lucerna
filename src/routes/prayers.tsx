@@ -1,10 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import type { FormEvent } from "react";
 import { AppLayout } from "@/components/app-layout";
 import { prayers, prayerCategories } from "@/lib/prayers-data";
 import { Input } from "@/components/ui/input";
-import { Search, Heart, Sparkles } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Search, Heart, Sparkles, PenLine } from "lucide-react";
 import { useFavorites } from "@/lib/favorites";
+import { useCustomPrayers } from "@/lib/custom-prayers";
 
 export const Route = createFileRoute("/prayers")({
   component: PrayersPage,
@@ -20,15 +33,44 @@ function PrayersPage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("All");
   const [favOnly, setFavOnly] = useState(false);
+  const [customOpen, setCustomOpen] = useState(false);
+  const [customTitle, setCustomTitle] = useState("");
+  const [customText, setCustomText] = useState("");
   const { isFavorite, toggle, favorites } = useFavorites();
+  const { customPrayers, addCustomPrayer } = useCustomPrayers();
 
-  const filtered = prayers.filter((p) => {
+  const allPrayers = useMemo(
+    () => [...customPrayers, ...prayers],
+    [customPrayers],
+  );
+
+  const categories = useMemo(
+    () => (customPrayers.length > 0 ? ["All", "Custom", ...prayerCategories] : ["All", ...prayerCategories]),
+    [customPrayers.length],
+  );
+
+  const filtered = allPrayers.filter((p) => {
     const matchCat = category === "All" || p.category === category;
     const q = query.toLowerCase().trim();
     const matchQ = !q || p.title.toLowerCase().includes(q) || p.text.toLowerCase().includes(q);
     const matchFav = !favOnly || isFavorite(p.id);
     return matchCat && matchQ && matchFav;
   });
+
+  const canSaveCustom = customTitle.trim().length > 0 && customText.trim().length > 0;
+
+  function handleCustomSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!canSaveCustom) return;
+
+    addCustomPrayer({ title: customTitle, text: customText });
+    setCategory("Custom");
+    setFavOnly(false);
+    setQuery("");
+    setCustomTitle("");
+    setCustomText("");
+    setCustomOpen(false);
+  }
 
   return (
     <AppLayout>
@@ -63,21 +105,30 @@ function PrayersPage() {
             className="pl-9"
           />
         </div>
-        <button
-          onClick={() => setFavOnly((v) => !v)}
-          className={`inline-flex items-center justify-center gap-2 rounded-md border px-3 py-2 text-xs transition-colors ${
-            favOnly
-              ? "border-primary bg-primary/10 text-primary"
-              : "border-border text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <Heart className={`h-4 w-4 ${favOnly ? "fill-current" : ""}`} />
-          Favorites {favorites.length > 0 && `(${favorites.length})`}
-        </button>
+        <div className="grid gap-2 sm:w-40">
+          <button
+            onClick={() => setCustomOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs text-primary transition-colors hover:border-primary"
+          >
+            <PenLine className="h-4 w-4" />
+            New prayer
+          </button>
+          <button
+            onClick={() => setFavOnly((v) => !v)}
+            className={`inline-flex items-center justify-center gap-2 rounded-md border px-3 py-2 text-xs transition-colors ${
+              favOnly
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Heart className={`h-4 w-4 ${favOnly ? "fill-current" : ""}`} />
+            Favorites {favorites.length > 0 && `(${favorites.length})`}
+          </button>
+        </div>
       </div>
 
       <div className="mb-6 flex flex-wrap gap-2">
-        {(["All", ...prayerCategories] as const).map((cat) => (
+        {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setCategory(cat)}
@@ -128,6 +179,46 @@ function PrayersPage() {
           <li className="py-12 text-center text-muted-foreground">No prayers found.</li>
         )}
       </ul>
+
+      <Dialog open={customOpen} onOpenChange={setCustomOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="font-serif text-2xl">Add Custom Prayer</DialogTitle>
+            <DialogDescription>
+              Save a personal prayer to this device.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleCustomSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="custom-prayer-title">Title</Label>
+              <Input
+                id="custom-prayer-title"
+                value={customTitle}
+                onChange={(event) => setCustomTitle(event.target.value)}
+                placeholder="Prayer title"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="custom-prayer-text">Prayer</Label>
+              <Textarea
+                id="custom-prayer-text"
+                value={customText}
+                onChange={(event) => setCustomText(event.target.value)}
+                placeholder="Write your prayer…"
+                className="min-h-40 font-serif leading-relaxed"
+              />
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setCustomOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" disabled={!canSaveCustom}>
+                Save prayer
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </AppLayout>
   );
 }

@@ -6,7 +6,7 @@ export const Route = createFileRoute("/calendar")({
   component: CalendarPage,
   head: () => ({
     meta: [
-      { title: "Liturgical Calendar — Lumen" },
+      { title: "Liturgical Calendar — Lucerna" },
       { name: "description", content: "Where we are in the Church's year — the season, its color, and its meaning." },
     ],
   }),

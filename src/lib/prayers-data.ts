@@ -21,14 +21,12 @@ export const prayers: Prayer[] = [
     title: "Our Father",
     category: "Essential",
     text: "Our Father, who art in heaven,\nhallowed be thy name;\nthy kingdom come,\nthy will be done\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us;\nand lead us not into temptation,\nbut deliver us from evil.\nAmen.",
-    latin: "Pater noster, qui es in cælis:\nsanctificétur nomen tuum;\nadvéniat regnum tuum;\nfiat volúntas tua, sicut in cælo, et in terra.\nPanem nostrum cotidiánum da nobis hódie;\net dimítte nobis débita nostra,\nsicut et nos dimíttimus debitóribus nostris;\net ne nos indúcas in tentatiónem;\nsed líbera nos a malo.\nAmen.",
   },
   {
     id: "hail-mary",
     title: "Hail Mary",
     category: "Marian",
     text: "Hail Mary, full of grace,\nthe Lord is with thee.\nBlessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death.\nAmen.",
-    latin: "Ave María, grátia plena,\nDóminus tecum.\nBenedícta tu in muliéribus,\net benedíctus fructus ventris tui, Iesus.\nSancta María, Mater Dei,\nora pro nobis peccatóribus,\nnunc et in hora mortis nostræ.\nAmen.",
   },
   {
     id: "glory-be",

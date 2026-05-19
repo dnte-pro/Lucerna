@@ -2,7 +2,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scripts, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useContext } from "react";
-const appCss = "/assets/styles-BatB_ltw.css";
+const appCss = "/assets/styles-1hXcVXTc.css";
 const KEY = "lucerna-notify";
 function loadNotifySettings() {
   if (typeof window === "undefined") return { enabled: false, time: "07:30" };
@@ -191,16 +191,16 @@ function ErrorComponent({ error, reset }) {
     ] })
   ] }) });
 }
-const Route$6 = createRootRouteWithContext()({
+const Route$7 = createRootRouteWithContext()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lumen — Catholic Prayer & Daily Readings" },
+      { title: "Lucerna — Catholic Prayer & Daily Readings" },
       { name: "description", content: "Daily Mass readings, the treasury of Catholic prayers, and the living rhythm of the liturgical year." },
-      { name: "author", content: "Lumen" },
+      { name: "author", content: "Lucerna" },
       { name: "theme-color", content: "#0d0d0d" },
-      { property: "og:title", content: "Lumen — Catholic Prayer & Daily Readings" },
+      { property: "og:title", content: "Lucerna — Catholic Prayer & Daily Readings" },
       { property: "og:description", content: "Daily readings, the treasury of Catholic prayers, and the liturgical year — beautifully presented." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -211,6 +211,7 @@ const Route$6 = createRootRouteWithContext()({
         rel: "stylesheet",
         href: appCss
       },
+      { rel: "icon", href: "/icon.svg" },
       { rel: "manifest", href: "/manifest.json" }
     ]
   }),
@@ -229,7 +230,7 @@ function RootShell({ children }) {
   ] });
 }
 function RootComponent() {
-  const { queryClient } = Route$6.useRouteContext();
+  const { queryClient } = Route$7.useRouteContext();
   return /* @__PURE__ */ jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsx(SettingsProvider, { children: /* @__PURE__ */ jsx(Outlet, {}) }) });
 }
 const prayerCategories = [
@@ -245,15 +246,13 @@ const prayers = [
     id: "our-father",
     title: "Our Father",
     category: "Essential",
-    text: "Our Father, who art in heaven,\nhallowed be thy name;\nthy kingdom come,\nthy will be done\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us;\nand lead us not into temptation,\nbut deliver us from evil.\nAmen.",
-    latin: "Pater noster, qui es in cælis:\nsanctificétur nomen tuum;\nadvéniat regnum tuum;\nfiat volúntas tua, sicut in cælo, et in terra.\nPanem nostrum cotidiánum da nobis hódie;\net dimítte nobis débita nostra,\nsicut et nos dimíttimus debitóribus nostris;\net ne nos indúcas in tentatiónem;\nsed líbera nos a malo.\nAmen."
+    text: "Our Father, who art in heaven,\nhallowed be thy name;\nthy kingdom come,\nthy will be done\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us;\nand lead us not into temptation,\nbut deliver us from evil.\nAmen."
   },
   {
     id: "hail-mary",
     title: "Hail Mary",
     category: "Marian",
-    text: "Hail Mary, full of grace,\nthe Lord is with thee.\nBlessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death.\nAmen.",
-    latin: "Ave María, grátia plena,\nDóminus tecum.\nBenedícta tu in muliéribus,\net benedíctus fructus ventris tui, Iesus.\nSancta María, Mater Dei,\nora pro nobis peccatóribus,\nnunc et in hora mortis nostræ.\nAmen."
+    text: "Hail Mary, full of grace,\nthe Lord is with thee.\nBlessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death.\nAmen."
   },
   {
     id: "glory-be",
@@ -347,7 +346,7 @@ const prayers = [
   }
 ];
 const BASE_URL = "";
-const Route$5 = createFileRoute("/sitemap.xml")({
+const Route$6 = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
@@ -377,7 +376,25 @@ const Route$5 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter$4 = () => import("./readings-poU6SGfM.js");
+const $$splitComponentImporter$5 = () => import("./rosary-DzqL-vq_.js");
+const Route$5 = createFileRoute("/rosary")({
+  component: lazyRouteComponent($$splitComponentImporter$5, "component"),
+  head: () => ({
+    meta: [{
+      title: "The Holy Rosary — Lucerna"
+    }, {
+      name: "description",
+      content: "Pray the Holy Rosary in order, with the mysteries aligned to today."
+    }, {
+      property: "og:title",
+      content: "The Holy Rosary — Lucerna"
+    }, {
+      property: "og:description",
+      content: "Daily Rosary with the proper mysteries for today."
+    }]
+  })
+});
+const $$splitComponentImporter$4 = () => import("./readings-BqjEnx_z.js");
 const Route$4 = createFileRoute("/readings")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component"),
   head: () => ({
@@ -389,7 +406,7 @@ const Route$4 = createFileRoute("/readings")({
     }]
   })
 });
-const $$splitComponentImporter$3 = () => import("./prayers-BCiUFy58.js");
+const $$splitComponentImporter$3 = () => import("./prayers-BXSZIrgI.js");
 const Route$3 = createFileRoute("/prayers")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component"),
   head: () => ({
@@ -401,65 +418,71 @@ const Route$3 = createFileRoute("/prayers")({
     }]
   })
 });
-const $$splitComponentImporter$2 = () => import("./calendar-KrwizQMd.js");
+const $$splitComponentImporter$2 = () => import("./calendar-_3dislqs.js");
 const Route$2 = createFileRoute("/calendar")({
   component: lazyRouteComponent($$splitComponentImporter$2, "component"),
   head: () => ({
     meta: [{
-      title: "Liturgical Calendar — Lumen"
+      title: "Liturgical Calendar — Lucerna"
     }, {
       name: "description",
       content: "Where we are in the Church's year — the season, its color, and its meaning."
     }]
   })
 });
-const $$splitComponentImporter$1 = () => import("./index-DgWt_Yfn.js");
+const $$splitComponentImporter$1 = () => import("./index-D3PnbdHy.js");
 const Route$1 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./prayer._id-BwPMcU5K.js");
+const $$splitComponentImporter = () => import("./prayer._id-Bqju1pTt.js");
 const Route = createFileRoute("/prayer/$id")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
-const SitemapDotxmlRoute = Route$5.update({
+const SitemapDotxmlRoute = Route$6.update({
   id: "/sitemap.xml",
   path: "/sitemap.xml",
-  getParentRoute: () => Route$6
+  getParentRoute: () => Route$7
+});
+const RosaryRoute = Route$5.update({
+  id: "/rosary",
+  path: "/rosary",
+  getParentRoute: () => Route$7
 });
 const ReadingsRoute = Route$4.update({
   id: "/readings",
   path: "/readings",
-  getParentRoute: () => Route$6
+  getParentRoute: () => Route$7
 });
 const PrayersRoute = Route$3.update({
   id: "/prayers",
   path: "/prayers",
-  getParentRoute: () => Route$6
+  getParentRoute: () => Route$7
 });
 const CalendarRoute = Route$2.update({
   id: "/calendar",
   path: "/calendar",
-  getParentRoute: () => Route$6
+  getParentRoute: () => Route$7
 });
 const IndexRoute = Route$1.update({
   id: "/",
   path: "/",
-  getParentRoute: () => Route$6
+  getParentRoute: () => Route$7
 });
 const PrayerIdRoute = Route.update({
   id: "/prayer/$id",
   path: "/prayer/$id",
-  getParentRoute: () => Route$6
+  getParentRoute: () => Route$7
 });
 const rootRouteChildren = {
   IndexRoute,
   CalendarRoute,
   PrayersRoute,
   ReadingsRoute,
+  RosaryRoute,
   SitemapDotxmlRoute,
   PrayerIdRoute
 };
-const routeTree = Route$6._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$7._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
   const router2 = createRouter({

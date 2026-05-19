@@ -8,15 +8,6 @@ and forgive us our trespasses,
 as we forgive those who trespass against us;
 and lead us not into temptation,
 but deliver us from evil.
-Amen.`,latin:`Pater noster, qui es in cælis:
-sanctificétur nomen tuum;
-advéniat regnum tuum;
-fiat volúntas tua, sicut in cælo, et in terra.
-Panem nostrum cotidiánum da nobis hódie;
-et dimítte nobis débita nostra,
-sicut et nos dimíttimus debitóribus nostris;
-et ne nos indúcas in tentatiónem;
-sed líbera nos a malo.
 Amen.`},{id:"hail-mary",title:"Hail Mary",category:"Marian",text:`Hail Mary, full of grace,
 the Lord is with thee.
 Blessed art thou amongst women,
@@ -24,13 +15,6 @@ and blessed is the fruit of thy womb, Jesus.
 Holy Mary, Mother of God,
 pray for us sinners,
 now and at the hour of our death.
-Amen.`,latin:`Ave María, grátia plena,
-Dóminus tecum.
-Benedícta tu in muliéribus,
-et benedíctus fructus ventris tui, Iesus.
-Sancta María, Mater Dei,
-ora pro nobis peccatóribus,
-nunc et in hora mortis nostræ.
 Amen.`},{id:"glory-be",title:"Glory Be",category:"Essential",text:`Glory be to the Father,
 and to the Son,
 and to the Holy Spirit,

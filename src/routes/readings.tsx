@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
-import { getTodayReading } from "@/lib/daily-readings";
+import { useDailyReading } from "@/lib/daily-readings";
 import { formatDate } from "@/lib/liturgical";
 
 export const Route = createFileRoute("/readings")({
@@ -14,7 +14,8 @@ export const Route = createFileRoute("/readings")({
 });
 
 function ReadingsPage() {
-  const r = getTodayReading();
+  const { reading: r, status } = useDailyReading();
+
   return (
     <AppLayout>
       <header className="mb-8 text-center">
@@ -25,18 +26,48 @@ function ReadingsPage() {
         <p className="mt-2 text-sm text-primary">
           {r.season} · Liturgical color: {r.seasonColor}
         </p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          {status === "live" && "Live readings loaded"}
+          {status === "cache" && "Showing saved readings"}
+          {status === "fallback" && "Showing built-in fallback readings"}
+          {status === "loading" && "Loading live readings…"}
+        </p>
         <div className="gold-divider mt-5 mx-auto w-24" />
       </header>
 
       <article className="space-y-10 max-w-2xl mx-auto">
+        {r.notice && (
+          <section className="rounded-xl border border-primary/30 bg-primary/10 p-4 text-sm text-muted-foreground">
+            {r.notice}
+            {r.usccbLink && (
+              <a
+                href={r.usccbLink}
+                target="_blank"
+                rel="noreferrer"
+                className="ml-1 text-primary hover:underline"
+              >
+                Open full readings.
+              </a>
+            )}
+          </section>
+        )}
+
         <ReadingBlock label="First Reading" reference={r.firstReading.ref}>
           <p className="font-serif leading-relaxed">{r.firstReading.text}</p>
         </ReadingBlock>
 
         <ReadingBlock label="Responsorial Psalm" reference={r.psalm.ref}>
-          <p className="font-serif italic text-primary">R. {r.psalm.response}</p>
+          {r.psalm.response && (
+            <p className="font-serif italic text-primary">R. {r.psalm.response}</p>
+          )}
           <p className="mt-3 font-serif leading-relaxed">{r.psalm.text}</p>
         </ReadingBlock>
+
+        {r.secondReading && (
+          <ReadingBlock label="Second Reading" reference={r.secondReading.ref}>
+            <p className="font-serif leading-relaxed">{r.secondReading.text}</p>
+          </ReadingBlock>
+        )}
 
         <ReadingBlock label="Gospel" reference={r.gospel.ref}>
           <p className="font-serif leading-relaxed">{r.gospel.text}</p>

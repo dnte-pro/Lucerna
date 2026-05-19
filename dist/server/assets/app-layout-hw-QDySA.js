@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRouterState, Link } from "@tanstack/react-router";
-import { X, Settings, Sun, Moon, Bell, BellOff, Home, BookOpen, Hand, Calendar } from "lucide-react";
+import { X, Settings, Sun, Moon, Bell, BellOff, Home, BookOpen, Book, Calendar } from "lucide-react";
 import * as React from "react";
 import { useState, useEffect } from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
@@ -8,7 +8,7 @@ import { cva } from "class-variance-authority";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Slot } from "@radix-ui/react-slot";
-import { u as useSettings, l as loadNotifySettings, r as requestPermission, s as saveNotifySettings } from "./router--Zspq7xM.js";
+import { u as useSettings, l as loadNotifySettings, r as requestPermission, s as saveNotifySettings } from "./router-B5AJG4Eu.js";
 import * as LabelPrimitive from "@radix-ui/react-label";
 function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -275,7 +275,7 @@ function SettingsSheet() {
 const nav = [
   { to: "/", label: "Today", icon: Home },
   { to: "/readings", label: "Readings", icon: BookOpen },
-  { to: "/prayers", label: "Prayers", icon: Hand },
+  { to: "/prayers", label: "Prayers", icon: Book },
   { to: "/calendar", label: "Calendar", icon: Calendar }
 ];
 function AppLayout({ children }) {
@@ -322,5 +322,8 @@ function AppLayout({ children }) {
 }
 export {
   AppLayout as A,
-  Input as I
+  Button as B,
+  Input as I,
+  Label as L,
+  cn as c
 };

@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
-import { A as AppLayout } from "./app-layout-eHvklV8A.js";
+import { A as AppLayout } from "./app-layout-hw-QDySA.js";
 import { g as getCurrentSeason, f as formatDate } from "./liturgical-BnruEgxp.js";
-import { g as getTodayReading } from "./daily-readings-BAxjsgpZ.js";
-import { a as prayers } from "./router--Zspq7xM.js";
+import { u as useDailyReading } from "./daily-readings-BCzdyg_I.js";
+import { a as prayers } from "./router-B5AJG4Eu.js";
 import { BookOpen, Calendar, Sparkles, Sunrise, Moon, Hand } from "lucide-react";
 import "react";
 import "@radix-ui/react-dialog";
@@ -15,7 +15,9 @@ import "@radix-ui/react-label";
 import "@tanstack/react-query";
 function Index() {
   const season = getCurrentSeason();
-  const reading = getTodayReading();
+  const {
+    reading
+  } = useDailyReading();
   const morning = prayers.find((p) => p.id === "morning-offering");
   const evening = prayers.find((p) => p.id === "night-prayer");
   return /* @__PURE__ */ jsxs(AppLayout, { children: [
@@ -33,6 +35,7 @@ function Index() {
         ] }),
         /* @__PURE__ */ jsx("h2", { className: "mt-3 font-serif text-2xl sm:text-3xl", children: reading.gospel.ref }),
         /* @__PURE__ */ jsx("p", { className: "mt-4 text-muted-foreground leading-relaxed line-clamp-[8] sm:line-clamp-[10]", children: reading.gospel.text }),
+        reading.source === "api" && /* @__PURE__ */ jsx("p", { className: "mt-3 text-xs text-muted-foreground", children: "Live readings loaded · full text opens on the readings page" }),
         /* @__PURE__ */ jsx("p", { className: "mt-6 text-sm text-primary group-hover:underline", children: "Read all of today's readings →" })
       ] }),
       /* @__PURE__ */ jsxs(Link, { to: "/calendar", className: "rounded-xl border border-border bg-card p-6 hover:border-primary/60 transition-colors", children: [

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
 import { getCurrentSeason, formatDate } from "@/lib/liturgical";
-import { getTodayReading } from "@/lib/daily-readings";
+import { useDailyReading } from "@/lib/daily-readings";
 import { prayers } from "@/lib/prayers-data";
 import { BookOpen, Hand, Calendar, Sparkles, Sunrise, Moon } from "lucide-react";
 
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const season = getCurrentSeason();
-  const reading = getTodayReading();
+  const { reading } = useDailyReading();
   const morning = prayers.find((p) => p.id === "morning-offering")!;
   const evening = prayers.find((p) => p.id === "night-prayer")!;
 
@@ -45,6 +45,11 @@ function Index() {
           <p className="mt-4 text-muted-foreground leading-relaxed line-clamp-[8] sm:line-clamp-[10]">
             {reading.gospel.text}
           </p>
+          {reading.source === "api" && (
+            <p className="mt-3 text-xs text-muted-foreground">
+              Live readings loaded · full text opens on the readings page
+            </p>
+          )}
           <p className="mt-6 text-sm text-primary group-hover:underline">
             Read all of today's readings →
           </p>

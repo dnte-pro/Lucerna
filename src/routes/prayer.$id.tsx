@@ -10,6 +10,7 @@ import {
 } from "@/lib/translations";
 import type { PrayerLanguage } from "@/lib/translations";
 import { useFavorites } from "@/lib/favorites";
+import { useCustomPrayers } from "@/lib/custom-prayers";
 
 export const Route = createFileRoute("/prayer/$id")({
   component: PrayerDetail,
@@ -17,9 +18,20 @@ export const Route = createFileRoute("/prayer/$id")({
 
 function PrayerDetail() {
   const { id } = Route.useParams();
-  const prayer = prayers.find((p) => p.id === id);
+  const { customPrayers, ready } = useCustomPrayers();
+  const prayer = prayers.find((p) => p.id === id) ?? customPrayers.find((p) => p.id === id);
   const [language, setLanguage] = useState<PrayerLanguage>("en");
   const { isFavorite, toggle } = useFavorites();
+
+  if (!prayer && id.startsWith("custom-") && !ready) {
+    return (
+      <AppLayout>
+        <div className="py-20 text-center text-sm text-muted-foreground">
+          Loading prayer…
+        </div>
+      </AppLayout>
+    );
+  }
 
   if (!prayer) {
     return (
@@ -99,7 +111,7 @@ function PrayerDetail() {
         </pre>
         {(language === "sw" || language === "kip") && (
           <p className="mt-6 text-center text-xs text-muted-foreground">
-            Corrections welcomed.
+            Community translation — corrections welcome.
           </p>
         )}
       </article>

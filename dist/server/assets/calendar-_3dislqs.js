@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as AppLayout } from "./app-layout-eHvklV8A.js";
+import { A as AppLayout } from "./app-layout-hw-QDySA.js";
 import { g as getCurrentSeason } from "./liturgical-BnruEgxp.js";
 import "@tanstack/react-router";
 import "lucide-react";
@@ -9,7 +9,7 @@ import "class-variance-authority";
 import "clsx";
 import "tailwind-merge";
 import "@radix-ui/react-slot";
-import "./router--Zspq7xM.js";
+import "./router-B5AJG4Eu.js";
 import "@tanstack/react-query";
 import "@radix-ui/react-label";
 const SEASONS = [{

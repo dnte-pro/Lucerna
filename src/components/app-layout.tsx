@@ -1,14 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Home, BookOpen, Hand, Calendar } from "lucide-react";
+import { Home, BookOpen, Calendar, Book } from "lucide-react";
 import { SettingsSheet } from "./settings-sheet";
 
 const nav = [
   { to: "/", label: "Today", icon: Home },
   { to: "/readings", label: "Readings", icon: BookOpen },
-  { to: "/prayers", label: "Prayers", icon: Hand },
+  { to: "/prayers", label: "Prayers", icon: Book },
   { to: "/calendar", label: "Calendar", icon: Calendar },
-];
+]
 
 export function AppLayout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
