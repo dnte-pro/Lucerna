@@ -1,13 +1,15 @@
 // Lucerna service worker — basic offline shell.
 const CACHE = "lucerna-v2";
+const BASE = new URL(self.registration.scope).pathname;
+const withBase = (path) => `${BASE}${path}`.replace(/\/{2,}/g, "/");
 const PRECACHE = [
-  "/",
-  "/prayers",
-  "/rosary",
-  "/readings",
-  "/calendar",
-  "/manifest.json",
-  "/icon.svg",
+  withBase(""),
+  withBase("prayers"),
+  withBase("rosary"),
+  withBase("readings"),
+  withBase("calendar"),
+  withBase("manifest.json"),
+  withBase("icon.svg"),
 ];
 
 self.addEventListener("install", (e) => {
@@ -41,7 +43,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE).then((c) => c.put(req, copy));
           return res;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match("/"))),
+        .catch(() => caches.match(req).then((r) => r || caches.match(withBase("")))),
     );
     return;
   }

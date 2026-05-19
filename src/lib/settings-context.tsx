@@ -70,7 +70,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         host.includes("lovableproject.com") ||
         host.includes("lovable.app");
       if (!inIframe && !isPreview) {
-        navigator.serviceWorker.register("/sw.js").catch(() => {});
+        navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {});
       } else {
         navigator.serviceWorker.getRegistrations().then((rs) =>
           rs.forEach((r) => r.unregister()),

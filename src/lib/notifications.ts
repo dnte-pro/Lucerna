@@ -49,7 +49,7 @@ export function scheduleNext(s: NotifySettings) {
     try {
       new Notification("Lucerna — Time to pray", {
         body: "Pause for your daily prayer and reading.",
-        icon: "/icon.svg",
+        icon: `${import.meta.env.BASE_URL}icon.svg`,
       });
     } catch {}
     scheduleNext(s);

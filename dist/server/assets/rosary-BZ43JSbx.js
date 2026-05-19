@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
 import * as React from "react";
 import { useState } from "react";
-import { c as cn, A as AppLayout } from "./app-layout-hw-QDySA.js";
+import { c as cn, A as AppLayout } from "./app-layout-B_7fCuwf.js";
 import { ChevronDown, ArrowLeft, Sparkles } from "lucide-react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { L as LANGUAGE_LABELS } from "./translations-BAGvPC92.js";
@@ -11,7 +11,7 @@ import "class-variance-authority";
 import "clsx";
 import "tailwind-merge";
 import "@radix-ui/react-slot";
-import "./router-B5AJG4Eu.js";
+import "./router-y3Ku7_p9.js";
 import "@tanstack/react-query";
 import "@radix-ui/react-label";
 const mysteries = {

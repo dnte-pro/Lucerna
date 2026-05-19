@@ -2,7 +2,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scripts, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useContext } from "react";
-const appCss = "/assets/styles-1hXcVXTc.css";
+const appCss = "/Lucerna/assets/styles-1hXcVXTc.css";
 const KEY = "lucerna-notify";
 function loadNotifySettings() {
   if (typeof window === "undefined") return { enabled: false, time: "07:30" };
@@ -44,7 +44,7 @@ function scheduleNext(s) {
     try {
       new Notification("Lucerna — Time to pray", {
         body: "Pause for your daily prayer and reading.",
-        icon: "/icon.svg"
+        icon: `${"/Lucerna/"}icon.svg`
       });
     } catch {
     }
@@ -103,7 +103,7 @@ function SettingsProvider({ children }) {
       const host = window.location.hostname;
       const isPreview = host.includes("id-preview--") || host.includes("lovableproject.com") || host.includes("lovable.app");
       if (!inIframe && !isPreview) {
-        navigator.serviceWorker.register("/sw.js").catch(() => {
+        navigator.serviceWorker.register(`${"/Lucerna/"}sw.js`).catch(() => {
         });
       } else {
         navigator.serviceWorker.getRegistrations().then(
@@ -147,6 +147,8 @@ function useSettings() {
   if (!ctx) throw new Error("useSettings must be used within SettingsProvider");
   return ctx;
 }
+const baseUrl = "/Lucerna/";
+const withBase = (path) => `${baseUrl}${path}`.replace(/\/{2,}/g, "/");
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -183,7 +185,7 @@ function ErrorComponent({ error, reset }) {
       /* @__PURE__ */ jsx(
         "a",
         {
-          href: "/",
+          href: baseUrl,
           className: "inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent",
           children: "Go home"
         }
@@ -211,8 +213,8 @@ const Route$7 = createRootRouteWithContext()({
         rel: "stylesheet",
         href: appCss
       },
-      { rel: "icon", href: "/icon.svg" },
-      { rel: "manifest", href: "/manifest.json" }
+      { rel: "icon", href: withBase("icon.svg") },
+      { rel: "manifest", href: withBase("manifest.json") }
     ]
   }),
   shellComponent: RootShell,
@@ -376,7 +378,7 @@ const Route$6 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter$5 = () => import("./rosary-DzqL-vq_.js");
+const $$splitComponentImporter$5 = () => import("./rosary-BZ43JSbx.js");
 const Route$5 = createFileRoute("/rosary")({
   component: lazyRouteComponent($$splitComponentImporter$5, "component"),
   head: () => ({
@@ -394,7 +396,7 @@ const Route$5 = createFileRoute("/rosary")({
     }]
   })
 });
-const $$splitComponentImporter$4 = () => import("./readings-BqjEnx_z.js");
+const $$splitComponentImporter$4 = () => import("./readings-CLuqg8eb.js");
 const Route$4 = createFileRoute("/readings")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component"),
   head: () => ({
@@ -406,7 +408,7 @@ const Route$4 = createFileRoute("/readings")({
     }]
   })
 });
-const $$splitComponentImporter$3 = () => import("./prayers-BXSZIrgI.js");
+const $$splitComponentImporter$3 = () => import("./prayers-CzEZYwdg.js");
 const Route$3 = createFileRoute("/prayers")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component"),
   head: () => ({
@@ -418,7 +420,7 @@ const Route$3 = createFileRoute("/prayers")({
     }]
   })
 });
-const $$splitComponentImporter$2 = () => import("./calendar-_3dislqs.js");
+const $$splitComponentImporter$2 = () => import("./calendar-DeEPEP5m.js");
 const Route$2 = createFileRoute("/calendar")({
   component: lazyRouteComponent($$splitComponentImporter$2, "component"),
   head: () => ({
@@ -430,11 +432,11 @@ const Route$2 = createFileRoute("/calendar")({
     }]
   })
 });
-const $$splitComponentImporter$1 = () => import("./index-D3PnbdHy.js");
+const $$splitComponentImporter$1 = () => import("./index-BC_oTnso.js");
 const Route$1 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./prayer._id-Bqju1pTt.js");
+const $$splitComponentImporter = () => import("./prayer._id-DjpOSuFU.js");
 const Route = createFileRoute("/prayer/$id")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
@@ -485,8 +487,10 @@ const rootRouteChildren = {
 const routeTree = Route$7._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
+  const basepath = "/Lucerna/".replace(/\/$/, "");
   const router2 = createRouter({
     routeTree,
+    basepath,
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0
