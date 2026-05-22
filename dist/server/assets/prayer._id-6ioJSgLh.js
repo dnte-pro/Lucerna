@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
-import { A as AppLayout } from "./app-layout-B_7fCuwf.js";
-import { R as Route, a as prayers } from "./router-y3Ku7_p9.js";
-import { useState } from "react";
+import { A as AppLayout } from "./app-layout-CQSfll1D.js";
+import { R as Route, a as prayers } from "./router-CC1Bbzc7.js";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Heart } from "lucide-react";
-import { p as prayerTranslations, g as getPrayerText, L as LANGUAGE_LABELS } from "./translations-BAGvPC92.js";
-import { u as useCustomPrayers, a as useFavorites } from "./custom-prayers-BL1HuWWf.js";
+import { p as prayerTranslations, g as getPrayerText, L as LANGUAGE_LABELS } from "./translations-DeB0rAtn.js";
+import { g as getCustomPrayer, a as useFavorites } from "./custom-prayers-BhMD-ZHo.js";
 import "@radix-ui/react-dialog";
 import "class-variance-authority";
 import "clsx";
@@ -17,19 +17,16 @@ function PrayerDetail() {
   const {
     id
   } = Route.useParams();
-  const {
-    customPrayers,
-    ready
-  } = useCustomPrayers();
-  const prayer = prayers.find((p) => p.id === id) ?? customPrayers.find((p) => p.id === id);
+  const [custom, setCustom] = useState(void 0);
+  useEffect(() => {
+    if (id.startsWith("custom-")) setCustom(getCustomPrayer(id));
+  }, [id]);
+  const prayer = prayers.find((p) => p.id === id) ?? custom;
   const [language, setLanguage] = useState("en");
   const {
     isFavorite,
     toggle
   } = useFavorites();
-  if (!prayer && id.startsWith("custom-") && !ready) {
-    return /* @__PURE__ */ jsx(AppLayout, { children: /* @__PURE__ */ jsx("div", { className: "py-20 text-center text-sm text-muted-foreground", children: "Loading prayer…" }) });
-  }
   if (!prayer) {
     return /* @__PURE__ */ jsx(AppLayout, { children: /* @__PURE__ */ jsxs("div", { className: "py-20 text-center", children: [
       /* @__PURE__ */ jsx("h1", { className: "font-serif text-3xl", children: "Prayer not found" }),
@@ -37,13 +34,12 @@ function PrayerDetail() {
     ] }) });
   }
   const availableLanguages = ["en"];
-  if (prayer.latin) availableLanguages.push("la");
   const t = prayerTranslations[prayer.id];
   if (t?.sw) availableLanguages.push("sw");
   if (t?.kip) availableLanguages.push("kip");
   const {
     text
-  } = getPrayerText(prayer.id, prayer.text, prayer.latin, language);
+  } = getPrayerText(prayer.id, prayer.text, void 0, language);
   const fav = isFavorite(prayer.id);
   return /* @__PURE__ */ jsxs(AppLayout, { children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between", children: [

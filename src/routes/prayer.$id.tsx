@@ -1,16 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
 import { prayers } from "@/lib/prayers-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Heart } from "lucide-react";
-import {
-  LANGUAGE_LABELS,
-  getPrayerText,
-  prayerTranslations,
-} from "@/lib/translations";
+import { LANGUAGE_LABELS, getPrayerText, prayerTranslations } from "@/lib/translations";
 import type { PrayerLanguage } from "@/lib/translations";
 import { useFavorites } from "@/lib/favorites";
-import { useCustomPrayers } from "@/lib/custom-prayers";
+import { getCustomPrayer } from "@/lib/custom-prayers";
+import type { Prayer } from "@/lib/prayers-data";
 
 export const Route = createFileRoute("/prayer/$id")({
   component: PrayerDetail,
@@ -18,20 +15,13 @@ export const Route = createFileRoute("/prayer/$id")({
 
 function PrayerDetail() {
   const { id } = Route.useParams();
-  const { customPrayers, ready } = useCustomPrayers();
-  const prayer = prayers.find((p) => p.id === id) ?? customPrayers.find((p) => p.id === id);
+  const [custom, setCustom] = useState<Prayer | undefined>(undefined);
+  useEffect(() => {
+    if (id.startsWith("custom-")) setCustom(getCustomPrayer(id));
+  }, [id]);
+  const prayer = prayers.find((p) => p.id === id) ?? custom;
   const [language, setLanguage] = useState<PrayerLanguage>("en");
   const { isFavorite, toggle } = useFavorites();
-
-  if (!prayer && id.startsWith("custom-") && !ready) {
-    return (
-      <AppLayout>
-        <div className="py-20 text-center text-sm text-muted-foreground">
-          Loading prayer…
-        </div>
-      </AppLayout>
-    );
-  }
 
   if (!prayer) {
     return (
@@ -47,12 +37,11 @@ function PrayerDetail() {
   }
 
   const availableLanguages: PrayerLanguage[] = ["en"];
-  if (prayer.latin) availableLanguages.push("la");
   const t = prayerTranslations[prayer.id];
   if (t?.sw) availableLanguages.push("sw");
   if (t?.kip) availableLanguages.push("kip");
 
-  const { text } = getPrayerText(prayer.id, prayer.text, prayer.latin, language);
+  const { text } = getPrayerText(prayer.id, prayer.text, undefined, language);
   const fav = isFavorite(prayer.id);
 
   return (

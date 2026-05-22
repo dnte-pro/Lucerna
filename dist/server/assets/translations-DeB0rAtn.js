@@ -1,6 +1,5 @@
 const LANGUAGE_LABELS = {
   en: "English",
-  la: "Latin",
   sw: "Kiswahili",
   kip: "Kipsigis"
 };
@@ -38,9 +37,8 @@ const prayerTranslations = {
     kip: "Mikaeli ne tilil, Malaikat ne ngwanindet,\niribana ko u biik chebo loseet;\nibe iyin ne yoche shetani;\nko iyin nyolu kayanet, saeech;\nago iin, Kiptaiyat nebo malaikaisiek,\nko u kamuktaet nebo Iyin, irurchi shetani jehanamu\nak tamirmirio tugul che ya che mengeche em ng'wony.\nAmen."
   }
 };
-function getPrayerText(prayerId, englishText, latin, language) {
+function getPrayerText(prayerId, englishText, _latin, language) {
   if (language === "en") return { text: englishText, available: true };
-  if (language === "la") return { text: latin ?? englishText, available: !!latin };
   const t = prayerTranslations[prayerId]?.[language];
   return { text: t ?? englishText, available: !!t };
 }

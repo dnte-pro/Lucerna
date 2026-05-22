@@ -39,16 +39,7 @@ function ReadingsPage() {
         {r.notice && (
           <section className="rounded-xl border border-primary/30 bg-primary/10 p-4 text-sm text-muted-foreground">
             {r.notice}
-            {r.usccbLink && (
-              <a
-                href={r.usccbLink}
-                target="_blank"
-                rel="noreferrer"
-                className="ml-1 text-primary hover:underline"
-              >
-                Open full readings.
-              </a>
-            )}
+            {/* Removed external USCCB link per request */}
           </section>
         )}
 

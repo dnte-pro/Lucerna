@@ -2,16 +2,15 @@
 // English is the canonical text in prayers-data.ts; this file adds Swahili (sw)
 // and Kipsigis (kip) renderings for the most common prayers.
 
-export type PrayerLanguage = "en" | "la" | "sw" | "kip";
+export type PrayerLanguage = "en" | "sw" | "kip";
 
 export const LANGUAGE_LABELS: Record<PrayerLanguage, string> = {
   en: "English",
-  la: "Latin",
   sw: "Kiswahili",
   kip: "Kipsigis",
 };
 
-type Translations = Partial<Record<Exclude<PrayerLanguage, "en" | "la">, string>>;
+type Translations = Partial<Record<Exclude<PrayerLanguage, "en">, string>>;
 
 export const prayerTranslations: Record<string, Translations> = {
   "our-father": {
@@ -51,11 +50,10 @@ export const prayerTranslations: Record<string, Translations> = {
 export function getPrayerText(
   prayerId: string,
   englishText: string,
-  latin: string | undefined,
+  _latin: string | undefined,
   language: PrayerLanguage,
 ): { text: string; available: boolean } {
   if (language === "en") return { text: englishText, available: true };
-  if (language === "la") return { text: latin ?? englishText, available: !!latin };
   const t = prayerTranslations[prayerId]?.[language];
   return { text: t ?? englishText, available: !!t };
 }

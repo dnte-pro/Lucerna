@@ -101,3 +101,7 @@ export function useCustomPrayers() {
 
   return { customPrayers, ready, addCustomPrayer, removeCustomPrayer };
 }
+
+export function getCustomPrayer(id: string) {
+  return read().find((p) => p.id === id);
+}

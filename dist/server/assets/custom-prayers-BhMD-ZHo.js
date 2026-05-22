@@ -93,7 +93,11 @@ function useCustomPrayers() {
   }, []);
   return { customPrayers, ready, addCustomPrayer, removeCustomPrayer };
 }
+function getCustomPrayer(id) {
+  return read().find((p) => p.id === id);
+}
 export {
   useFavorites as a,
+  getCustomPrayer as g,
   useCustomPrayers as u
 };

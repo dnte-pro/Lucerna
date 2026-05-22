@@ -1,17 +1,15 @@
-import { jsx, jsxs } from "react/jsx-runtime";
+import { jsxs, jsx } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
-import * as React from "react";
 import { useState } from "react";
-import { c as cn, A as AppLayout } from "./app-layout-B_7fCuwf.js";
-import { ChevronDown, ArrowLeft, Sparkles } from "lucide-react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { L as LANGUAGE_LABELS } from "./translations-BAGvPC92.js";
+import { A as AppLayout } from "./app-layout-CQSfll1D.js";
+import { ArrowLeft, Sparkles } from "lucide-react";
+import { L as LANGUAGE_LABELS } from "./translations-DeB0rAtn.js";
 import "@radix-ui/react-dialog";
 import "class-variance-authority";
 import "clsx";
 import "tailwind-merge";
 import "@radix-ui/react-slot";
-import "./router-y3Ku7_p9.js";
+import "./router-CC1Bbzc7.js";
 import "@tanstack/react-query";
 import "@radix-ui/react-label";
 const mysteries = {
@@ -126,35 +124,6 @@ const rosarySteps = [
     prayer: "O God, whose only-begotten Son, by His life, death, and resurrection, has purchased for us the rewards of eternal life: grant, we beseech Thee, that meditating upon these mysteries of the most holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise. Through the same Christ our Lord. Amen.\n\nIn the name of the Father, and of the Son, and of the Holy Spirit. Amen."
   }
 ];
-const Accordion = AccordionPrimitive.Root;
-const AccordionItem = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
-AccordionItem.displayName = "AccordionItem";
-const AccordionTrigger = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs(
-  AccordionPrimitive.Trigger,
-  {
-    ref,
-    className: cn(
-      "flex flex-1 items-center justify-between py-4 text-sm font-medium cursor-pointer transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180",
-      className
-    ),
-    ...props,
-    children: [
-      children,
-      /* @__PURE__ */ jsx(ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
-    ]
-  }
-) }));
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-const AccordionContent = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx(
-  AccordionPrimitive.Content,
-  {
-    ref,
-    className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
-    ...props,
-    children: /* @__PURE__ */ jsx("div", { className: cn("pb-4 pt-0", className), children })
-  }
-));
-AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 const rosaryStepTranslations = {
   "1. Sign of the Cross & Apostles' Creed": {
     sw: {
@@ -320,21 +289,19 @@ function RosaryPage() {
       /* @__PURE__ */ jsx("h2", { className: "font-serif text-2xl", children: "How to Pray the Rosary" }),
       /* @__PURE__ */ jsx("div", { className: "gold-divider mt-3 w-16" }),
       /* @__PURE__ */ jsx("div", { className: "mt-4 flex justify-center", children: /* @__PURE__ */ jsx("div", { className: "inline-flex flex-wrap justify-center rounded-full border border-border p-1 text-xs", children: ROSARY_LANGS.map((lang) => /* @__PURE__ */ jsx("button", { onClick: () => setLanguage(lang), className: `px-3 py-1 rounded-full transition-colors ${language === lang ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"}`, children: LANGUAGE_LABELS[lang] }, lang)) }) }),
-      /* @__PURE__ */ jsx(Accordion, { type: "multiple", className: "mt-6 space-y-3", children: rosarySteps.map((step) => {
+      /* @__PURE__ */ jsx("ol", { className: "mt-6 space-y-4", children: rosarySteps.map((step) => {
         const {
           instruction,
           prayer
         } = getRosaryStepText(step.label, step.instruction, step.prayer, language);
-        return /* @__PURE__ */ jsxs(AccordionItem, { value: step.label, className: "rounded-xl border border-border bg-card px-5 border-b", children: [
-          /* @__PURE__ */ jsx(AccordionTrigger, { className: "font-serif text-lg text-primary hover:no-underline", children: step.label }),
-          /* @__PURE__ */ jsxs(AccordionContent, { children: [
-            instruction && /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: instruction }),
-            prayer && /* @__PURE__ */ jsx("pre", { className: "mt-3 whitespace-pre-wrap font-serif text-base leading-relaxed", children: prayer }),
-            language !== "en" && /* @__PURE__ */ jsx("p", { className: "mt-4 text-xs text-muted-foreground", children: "Community translation." })
-          ] })
+        return /* @__PURE__ */ jsxs("li", { className: "rounded-xl border border-border bg-card p-5", children: [
+          /* @__PURE__ */ jsx("h3", { className: "font-serif text-lg text-primary", children: step.label }),
+          instruction && /* @__PURE__ */ jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: instruction }),
+          prayer && /* @__PURE__ */ jsx("pre", { className: "mt-3 whitespace-pre-wrap font-serif text-base leading-relaxed", children: prayer }),
+          language !== "en" && /* @__PURE__ */ jsx("p", { className: "mt-4 text-xs text-muted-foreground", children: "Community translation — corrections welcome." })
         ] }, step.label);
       }) }),
-      /* @__PURE__ */ jsx("p", { className: "mt-8 text-center text-xs text-muted-foreground ornament", children: "Holy Mary, pray for us." })
+      /* @__PURE__ */ jsx("p", { className: "mt-8 text-center text-xs text-muted-foreground ornament", children: "Ave Maria, gratia plena" })
     ] })
   ] });
 }

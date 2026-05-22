@@ -6,14 +6,7 @@ import {
   rosarySteps,
   getTodaysMystery,
 } from "@/lib/rosary-data";
-import type { MysterySet } from "@/lib/rosary-data";
 import { ArrowLeft, Sparkles } from "lucide-react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
 import { getRosaryStepText } from "@/lib/rosary-translation";
 import { LANGUAGE_LABELS } from "@/lib/translations";
 import type { PrayerLanguage } from "@/lib/translations";
@@ -40,11 +33,11 @@ export const Route = createFileRoute("/rosary")({
   }),
 });
 
-const SETS: MysterySet[] = ["Joyful", "Sorrowful", "Glorious", "Luminous"];
+const SETS: ("Joyful" | "Sorrowful" | "Glorious" | "Luminous")[] = ["Joyful", "Sorrowful", "Glorious", "Luminous"];
 
 function RosaryPage() {
   const today = getTodaysMystery();
-  const [selected, setSelected] = useState<MysterySet>(today);
+  const [selected, setSelected] = useState(today);
   const [language, setLanguage] = useState<RosaryLang>("en");
   const active = mysteries[selected];
 
@@ -141,7 +134,7 @@ function RosaryPage() {
           </div>
         </div>
 
-        <Accordion type="multiple" className="mt-6 space-y-3">
+        <ol className="mt-6 space-y-4">
           {rosarySteps.map((step) => {
             const { instruction, prayer } = getRosaryStepText(
               step.label,
@@ -150,36 +143,31 @@ function RosaryPage() {
               language,
             );
             return (
-              <AccordionItem
+              <li
                 key={step.label}
-                value={step.label}
-                className="rounded-xl border border-border bg-card px-5 border-b"
+                className="rounded-xl border border-border bg-card p-5"
               >
-                <AccordionTrigger className="font-serif text-lg text-primary hover:no-underline">
-                  {step.label}
-                </AccordionTrigger>
-                <AccordionContent>
-                  {instruction && (
-                    <p className="text-sm text-muted-foreground">{instruction}</p>
-                  )}
-                  {prayer && (
-                    <pre className="mt-3 whitespace-pre-wrap font-serif text-base leading-relaxed">
-                      {prayer}
-                    </pre>
-                  )}
-                  {language !== "en" && (
-                    <p className="mt-4 text-xs text-muted-foreground">
-                      Community translation.
-                    </p>
-                  )}
-                </AccordionContent>
-              </AccordionItem>
+                <h3 className="font-serif text-lg text-primary">{step.label}</h3>
+                {instruction && (
+                  <p className="mt-2 text-sm text-muted-foreground">{instruction}</p>
+                )}
+                {prayer && (
+                  <pre className="mt-3 whitespace-pre-wrap font-serif text-base leading-relaxed">
+                    {prayer}
+                  </pre>
+                )}
+                {language !== "en" && (
+                  <p className="mt-4 text-xs text-muted-foreground">
+                    Community translation — corrections welcome.
+                  </p>
+                )}
+              </li>
             );
           })}
-        </Accordion>
+        </ol>
 
         <p className="mt-8 text-center text-xs text-muted-foreground ornament">
-          Holy Mary, pray for us.
+          Ave Maria, gratia plena
         </p>
       </section>
     </AppLayout>

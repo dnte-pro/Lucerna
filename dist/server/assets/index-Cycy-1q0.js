@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
-import { A as AppLayout } from "./app-layout-B_7fCuwf.js";
+import { A as AppLayout } from "./app-layout-CQSfll1D.js";
 import { g as getCurrentSeason, f as formatDate } from "./liturgical-BnruEgxp.js";
 import { u as useDailyReading } from "./daily-readings-BCzdyg_I.js";
-import { a as prayers } from "./router-y3Ku7_p9.js";
+import { a as prayers } from "./router-CC1Bbzc7.js";
 import { BookOpen, Calendar, Sparkles, Sunrise, Moon, Hand } from "lucide-react";
 import "react";
 import "@radix-ui/react-dialog";

@@ -1,4 +1,4 @@
-import{j as k}from"./app-layout-YYIj58Xt.js";const t=[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]],l=k("arrow-left",t),w={en:"English",la:"Latin",sw:"Kiswahili",kip:"Kipsigis"},o={"our-father":{sw:`Baba yetu uliye mbinguni,
+import{e as u}from"./app-layout-H-mvWf7r.js";const k=[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]],l=u("arrow-left",k),w={en:"English",sw:"Kiswahili",kip:"Kipsigis"},t={"our-father":{sw:`Baba yetu uliye mbinguni,
 jina lako litukuzwe;
 ufalme wako ufike,
 utakalo lifanyike
@@ -81,4 +81,4 @@ ko iyin nyolu kayanet, saeech;
 ago iin, Kiptaiyat nebo malaikaisiek,
 ko u kamuktaet nebo Iyin, irurchi shetani jehanamu
 ak tamirmirio tugul che ya che mengeche em ng'wony.
-Amen.`}};function y(u,a,i,n){if(n==="en")return{text:a,available:!0};if(n==="la")return{text:i??a,available:!!i};const e=o[u]?.[n];return{text:e??a,available:!!e}}export{l as A,w as L,y as g,o as p};
+Amen.`}};function y(e,a,o,n){if(n==="en")return{text:a,available:!0};const i=t[e]?.[n];return{text:i??a,available:!!i}}export{l as A,w as L,y as g,t as p};

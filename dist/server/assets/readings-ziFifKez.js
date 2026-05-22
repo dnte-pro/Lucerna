@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as AppLayout } from "./app-layout-B_7fCuwf.js";
+import { A as AppLayout } from "./app-layout-CQSfll1D.js";
 import { u as useDailyReading } from "./daily-readings-BCzdyg_I.js";
 import { f as formatDate } from "./liturgical-BnruEgxp.js";
 import "@tanstack/react-router";
@@ -10,7 +10,7 @@ import "class-variance-authority";
 import "clsx";
 import "tailwind-merge";
 import "@radix-ui/react-slot";
-import "./router-y3Ku7_p9.js";
+import "./router-CC1Bbzc7.js";
 import "@tanstack/react-query";
 import "@radix-ui/react-label";
 function ReadingsPage() {
