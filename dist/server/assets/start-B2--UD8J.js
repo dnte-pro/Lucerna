@@ -1,5 +1,5 @@
 import { r as renderErrorPage } from "../server.js";
-import { c as createMiddleware } from "./server-D0ZzuaYZ.js";
+import { c as createMiddleware } from "./server-Bs5S-Xwx.js";
 import "node:async_hooks";
 import "h3-v2";
 import "@tanstack/router-core";

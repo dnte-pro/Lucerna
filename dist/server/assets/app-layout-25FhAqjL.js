@@ -8,7 +8,7 @@ import { cva } from "class-variance-authority";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Slot } from "@radix-ui/react-slot";
-import { u as useSettings, l as loadNotifySettings, r as requestPermission, s as saveNotifySettings } from "./router-CC1Bbzc7.js";
+import { u as useSettings, l as loadNotifySettings, r as requestPermission, s as saveNotifySettings } from "./router-Ci5J6gTK.js";
 import * as LabelPrimitive from "@radix-ui/react-label";
 function cn(...inputs) {
   return twMerge(clsx(inputs));

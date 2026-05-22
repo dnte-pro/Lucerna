@@ -1,4 +1,4 @@
-import{e as u}from"./app-layout-H-mvWf7r.js";const k=[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]],l=u("arrow-left",k),w={en:"English",sw:"Kiswahili",kip:"Kipsigis"},t={"our-father":{sw:`Baba yetu uliye mbinguni,
+import{e as u}from"./app-layout-DLvRHFyN.js";const k=[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]],l=u("arrow-left",k),w={en:"English",sw:"Kiswahili",kip:"Kipsigis"},t={"our-father":{sw:`Baba yetu uliye mbinguni,
 jina lako litukuzwe;
 ufalme wako ufike,
 utakalo lifanyike

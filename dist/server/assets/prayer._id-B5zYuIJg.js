@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
-import { A as AppLayout } from "./app-layout-CQSfll1D.js";
-import { R as Route, a as prayers } from "./router-CC1Bbzc7.js";
+import { A as AppLayout } from "./app-layout-25FhAqjL.js";
+import { R as Route, a as prayers } from "./router-Ci5J6gTK.js";
 import { useState, useEffect } from "react";
 import { ArrowLeft, Heart } from "lucide-react";
 import { p as prayerTranslations, g as getPrayerText, L as LANGUAGE_LABELS } from "./translations-DeB0rAtn.js";

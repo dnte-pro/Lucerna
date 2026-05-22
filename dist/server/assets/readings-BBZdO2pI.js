@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as AppLayout } from "./app-layout-CQSfll1D.js";
+import { A as AppLayout } from "./app-layout-25FhAqjL.js";
 import { u as useDailyReading } from "./daily-readings-BCzdyg_I.js";
 import { f as formatDate } from "./liturgical-BnruEgxp.js";
 import "@tanstack/react-router";
@@ -10,7 +10,7 @@ import "class-variance-authority";
 import "clsx";
 import "tailwind-merge";
 import "@radix-ui/react-slot";
-import "./router-CC1Bbzc7.js";
+import "./router-Ci5J6gTK.js";
 import "@tanstack/react-query";
 import "@radix-ui/react-label";
 function ReadingsPage() {
@@ -36,10 +36,7 @@ function ReadingsPage() {
       /* @__PURE__ */ jsx("div", { className: "gold-divider mt-5 mx-auto w-24" })
     ] }),
     /* @__PURE__ */ jsxs("article", { className: "space-y-10 max-w-2xl mx-auto", children: [
-      r.notice && /* @__PURE__ */ jsxs("section", { className: "rounded-xl border border-primary/30 bg-primary/10 p-4 text-sm text-muted-foreground", children: [
-        r.notice,
-        r.usccbLink && /* @__PURE__ */ jsx("a", { href: r.usccbLink, target: "_blank", rel: "noreferrer", className: "ml-1 text-primary hover:underline", children: "Open full readings." })
-      ] }),
+      r.notice && /* @__PURE__ */ jsx("section", { className: "rounded-xl border border-primary/30 bg-primary/10 p-4 text-sm text-muted-foreground", children: r.notice }),
       /* @__PURE__ */ jsx(ReadingBlock, { label: "First Reading", reference: r.firstReading.ref, children: /* @__PURE__ */ jsx("p", { className: "font-serif leading-relaxed", children: r.firstReading.text }) }),
       /* @__PURE__ */ jsxs(ReadingBlock, { label: "Responsorial Psalm", reference: r.psalm.ref, children: [
         r.psalm.response && /* @__PURE__ */ jsxs("p", { className: "font-serif italic text-primary", children: [

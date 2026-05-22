@@ -2,7 +2,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scripts, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useContext } from "react";
-const appCss = "/assets/styles-DFlLqfBm.css";
+const appCss = "/Lucerna/assets/styles-DFlLqfBm.css";
 const KEY = "lucerna-notify";
 function loadNotifySettings() {
   if (typeof window === "undefined") return { enabled: false, time: "07:30" };
@@ -44,7 +44,7 @@ function scheduleNext(s) {
     try {
       new Notification("Lucerna — Time to pray", {
         body: "Pause for your daily prayer and reading.",
-        icon: `${"/"}icon.svg`
+        icon: `${"/Lucerna/"}icon.svg`
       });
     } catch {
     }
@@ -103,7 +103,7 @@ function SettingsProvider({ children }) {
       const host = window.location.hostname;
       const isPreview = host.includes("id-preview--") || host.includes("lovableproject.com") || host.includes("lovable.app");
       if (!inIframe && !isPreview) {
-        navigator.serviceWorker.register(`${"/"}sw.js`).catch(() => {
+        navigator.serviceWorker.register(`${"/Lucerna/"}sw.js`).catch(() => {
         });
       } else {
         navigator.serviceWorker.getRegistrations().then(
@@ -147,7 +147,7 @@ function useSettings() {
   if (!ctx) throw new Error("useSettings must be used within SettingsProvider");
   return ctx;
 }
-const baseUrl = "/";
+const baseUrl = "/Lucerna/";
 const withBase = (path) => `${baseUrl}${path}`.replace(/\/{2,}/g, "/");
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
@@ -378,7 +378,7 @@ const Route$6 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter$5 = () => import("./rosary-BJQ4udm_.js");
+const $$splitComponentImporter$5 = () => import("./rosary-M-thyYfs.js");
 const Route$5 = createFileRoute("/rosary")({
   component: lazyRouteComponent($$splitComponentImporter$5, "component"),
   head: () => ({
@@ -396,7 +396,7 @@ const Route$5 = createFileRoute("/rosary")({
     }]
   })
 });
-const $$splitComponentImporter$4 = () => import("./readings-ziFifKez.js");
+const $$splitComponentImporter$4 = () => import("./readings-BBZdO2pI.js");
 const Route$4 = createFileRoute("/readings")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component"),
   head: () => ({
@@ -408,7 +408,7 @@ const Route$4 = createFileRoute("/readings")({
     }]
   })
 });
-const $$splitComponentImporter$3 = () => import("./prayers-4srRXx6c.js");
+const $$splitComponentImporter$3 = () => import("./prayers-CwAE6xf9.js");
 const Route$3 = createFileRoute("/prayers")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component"),
   head: () => ({
@@ -420,7 +420,7 @@ const Route$3 = createFileRoute("/prayers")({
     }]
   })
 });
-const $$splitComponentImporter$2 = () => import("./calendar-ySR1c8eW.js");
+const $$splitComponentImporter$2 = () => import("./calendar-CpeQkhqO.js");
 const Route$2 = createFileRoute("/calendar")({
   component: lazyRouteComponent($$splitComponentImporter$2, "component"),
   head: () => ({
@@ -432,11 +432,11 @@ const Route$2 = createFileRoute("/calendar")({
     }]
   })
 });
-const $$splitComponentImporter$1 = () => import("./index-Cycy-1q0.js");
+const $$splitComponentImporter$1 = () => import("./index-CycsKRuc.js");
 const Route$1 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./prayer._id-6ioJSgLh.js");
+const $$splitComponentImporter = () => import("./prayer._id-B5zYuIJg.js");
 const Route = createFileRoute("/prayer/$id")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
@@ -487,7 +487,7 @@ const rootRouteChildren = {
 const routeTree = Route$7._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
-  const basepath = "/".replace(/\/$/, "");
+  const basepath = "/Lucerna/".replace(/\/$/, "");
   const router2 = createRouter({
     routeTree,
     basepath,
